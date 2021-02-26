@@ -5,7 +5,7 @@ This application was built with ASP.NET CORE MVC
 
 Kindly use the menu to navigate and test the application
 
-Test the program with the input amounts specified below,
+The program was tested with the input amounts specified below,
 
 5000, 45000, 50030
 
