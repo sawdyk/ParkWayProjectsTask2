@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Transaction Surcharge Calculator";
+}
+
+<div class="col-md-12 form-holder" style="margin-left:350px;">
+    <!-- <div class="form-holder"> -->
+    <div class="form-content">
+
+        <div class="form-items">
+            <div class="page-links">
+                <a href="#" class="active">TRANSACTION SURCHARGE CALCULATOR</a>
+            </div>
+            <br />
+            @if (ViewData["Message"] != null)
+            {
+                @ViewData["Message"];
+            }
+            <br />  <br />
+            <form method="post">
+                <div class="col-md-4">
+                    <input asp type="text" name="amount" required placeholder="Enter Amount to be transferred" class="form-control" onkeypress="return isNumber(event)" />
+                </div>
+                <br />
+                <div class="col-md-4">
+                    <button id="submit" type="submit" class="btn btn-primary">Calculate Surcharge Fee</button>
+                </div>
+            </form>
+            <br />  <br />
+            <table class="table table-striped table-bordered" style="width:100%; margin-left:-350px;">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Transfer Amount</th>
+                        <th>Charge</th>
+                        <th>Debit Amount (Transfer Amount + Charge)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @if (ViewData["Amount"] != null)
+                            {@ViewData["Amount"]}
+                        </td>
+                        <td>
+                            @if (ViewData["TransferAmount"] != null)
+                            {@ViewData["TransferAmount"]}
+                        </td>
+                        <td>
+                            @if (ViewData["Charge"] != null)
+                            {@ViewData["Charge"]}
+                        </td>
+                        <td>
+                            @if (ViewData["DebitAmount"] != null)
+                            {@ViewData["DebitAmount"]}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>
