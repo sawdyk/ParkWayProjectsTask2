@@ -50,7 +50,7 @@ namespace ParkWayProjectsTask2.Controllers
             ViewData["DebitAmount"] = result.DebitedAmount;
 
             //logs the information of the transaction
-            _logger.LogInformation(string.Format("Message: {0} {1} {2}", result.Message, result.TransferAmount, result.Charge));
+            _logger.LogInformation(string.Format("Message: {0} Amount: {1} Transfer Amount: {2} Charge: {3} DebitedAmoumt: {4}", result.Message, result.Amount, result.TransferAmount, result.Charge, result.DebitedAmount));
 
             return View();
         }
