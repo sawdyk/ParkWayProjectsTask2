@@ -30,29 +30,42 @@ namespace ParkWayProjectsTask2.Controllers
         [HttpGet]
         public IActionResult CalculateTransactionSurchargeFee()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch
+            {
+                return View("Error1");
+            }
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> CalculateTransactionSurchargeFee(long amount)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest();
+                if (!ModelState.IsValid)
+                {
+                    return View("Error1");
+                }
+
+                var result = await _transactionsRepo.calculateTransactionSurchargeAsync(amount);
+
+                ViewData["Message"] = result.Message;
+                ViewData["Amount"] = result.Amount;
+                ViewData["TransferAmount"] = result.TransferAmount;
+                ViewData["Charge"] = result.Charge;
+                ViewData["DebitAmount"] = result.DebitedAmount;
+
+                return View();
+
             }
-
-            var result = await _transactionsRepo.calculateTransactionSurchargeAsync(amount);
-
-            ViewData["Message"] = result.Message;
-            ViewData["Amount"] = result.Amount;
-            ViewData["TransferAmount"] = result.TransferAmount;
-            ViewData["Charge"] = result.Charge;
-            ViewData["DebitAmount"] = result.DebitedAmount;
-
-            //logs the information of the transaction
-            _logger.LogInformation(string.Format("Message: {0} Amount: {1} Transfer Amount: {2} Charge: {3} DebitedAmoumt: {4}", result.Message, result.Amount, result.TransferAmount, result.Charge, result.DebitedAmount));
-
-            return View();
+            catch
+            {
+                return View("Error1");
+            }
         }
     }
 }
